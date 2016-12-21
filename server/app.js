@@ -23,3 +23,4 @@ app.listen(port, function() {
 
 // Expose public folder
 app.use(express.static('public'));
+app.use(express.static('node_modules/font-awesome'));
