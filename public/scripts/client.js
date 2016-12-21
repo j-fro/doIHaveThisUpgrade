@@ -11,11 +11,15 @@ function init() {
 
 function enable() {
     // Set up event handlers
+    $('#newColorButton').on('click', addColor);
+    $('#newSizeButton').on('click', addSize);
 }
 
 /*
  * --- COLORS & SIZES ---
  */
+
+/* --- GET & DISPLAY --- */
 
 function getColors() {
     console.log('Getting colors from server');
@@ -48,6 +52,46 @@ function displayOptions(options, type) {
         htmlString += '<option value="' + opt.id + '">' + opt[type] + '</option>';
     });
     $('.' + type + '-select').html(htmlString);
+}
+
+/* --- CREATE NEW --- */
+
+function addColor() {
+    // Send a user defined color to the server
+    var color = $('#newColorIn').val();
+    console.log('Adding a new color:', color);
+    $.ajax({
+        url: '/colors',
+        type: 'POST',
+        data: {
+            color: color
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            // Clear the input
+            $('#newColorIn').val('');
+            getColors();
+        }
+    });
+}
+
+function addSize() {
+    // Send a user defined color to the server
+    var size = $('#newSizeIn').val();
+    console.log('Adding a new size:', size);
+    $.ajax({
+        url: '/sizes',
+        type: 'POST',
+        data: {
+            size: size
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            // Clear the input
+            $('#newSizeIn').val('');
+            getSizes();
+        }
+    });
 }
 
 function ajaxError(error) {
