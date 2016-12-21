@@ -13,6 +13,38 @@ function enable() {
     // Set up event handlers
     $('#newColorButton').on('click', addColor);
     $('#newSizeButton').on('click', addSize);
+    $('#newItemButton').on('click', addItem);
+}
+
+/*
+ * --- ITEMS ---
+ */
+
+/* --- GET & DISPLAY --- */
+
+/* --- CREATE NEW --- */
+
+function addItem() {
+    var name = $('#newItemNameIn').val();
+    var color = $('#newItemColorIn').val();
+    var size = $('#newItemSizeIn').val();
+    console.log('Add a new item:', name, color, size);
+    $.ajax({
+        url: '/items',
+        type: 'POST',
+        data: {
+            name: name,
+            colorId: color,
+            sizeId: size
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            // Clear the input
+            $('#newItemNameIn').val('');
+            $('#newItemColorIn').val('');
+            $('#newItemSizeIn').val('');
+        }
+    });
 }
 
 /*
