@@ -1,40 +1,55 @@
 $(document).ready(function() {
+    init();
     // Add event handlers
     enable();
 });
+
+function init() {
+    getColors();
+    getSizes();
+}
 
 function enable() {
     // Set up event handlers
 }
 
-// GET from server
-function getData() {
+/*
+ * --- COLORS & SIZES ---
+ */
+
+function getColors() {
+    console.log('Getting colors from server');
     $.ajax({
-        url: '/',
-        type: 'GET',
+        url: '/colors',
         success: function(response) {
-            // Process results
+            console.log('Received from server:', response);
+            displayOptions(response, 'color');
         },
-        error: function(error) {
-            console.log("AJAX error:", error);
-        }
+        error: ajaxError
     });
 }
 
-// POST to server
-function postData() {
-    // Build new object
-    var objectToSend = {};
-    // POST object
+function getSizes() {
+    console.log('Getting sizes from server');
     $.ajax({
-        url: '/',
-        type: 'POST',
-        data: objectToSend,
+        url: '/sizes',
         success: function(response) {
-            // Process results
+            console.log('Received from server:', response);
+            displayOptions(response, 'size');
         },
-        error: function(error) {
-            console.log("AJAX error:", error);
-        }
+        error: ajaxError
     });
+}
+
+function displayOptions(options, type) {
+    // Add all [options] to select with the class .[type]-select
+    var htmlString = '';
+    options.forEach(function(opt) {
+        htmlString += '<option value="' + opt.id + '">' + opt[type] + '</option>';
+    });
+    $('.' + type + '-select').html(htmlString);
+}
+
+function ajaxError(error) {
+    console.log('AJAX error:', error);
 }
