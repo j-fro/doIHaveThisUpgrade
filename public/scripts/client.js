@@ -5,6 +5,7 @@ $(document).ready(function() {
 });
 
 function init() {
+    $('.admin').hide();
     getColors();
     getSizes();
     getItems();
@@ -18,6 +19,15 @@ function enable() {
     $('#removeColorButton').on('click', removeColor);
     $('#removeSizeButton').on('click', removeSize);
     $('#removeItemButton').on('click', removeItem);
+    $('#searchButton').on('click', searchItems);
+    $('#switchToSearch').on('click', function() {
+        $('.admin').slideUp();
+        $('.search').show();
+    });
+    $('#switchToAdmin').on('click', function() {
+        $('.admin').slideDown();
+        $('.search').hide();
+    });
 }
 
 /*
@@ -36,6 +46,40 @@ function getItems() {
         },
         error: ajaxError
     });
+}
+
+function searchItems() {
+    var searchName = $('#searchName').val();
+    var searchColor = $('#searchColor').val();
+    var searchSize = $('#searchSize').val();
+    console.log('Searching for items', searchName, searchColor, searchSize);
+    var searchQuery = {};
+    // if (searchName.length > 0) {
+        searchQuery.name = '%' + searchName + '%';
+    // }
+    if (searchColor !== 'none') {
+        searchQuery.colorId = searchColor;
+    }
+    if (searchSize !== 'none') {
+        searchQuery.sizeId = searchSize;
+    }
+    $.ajax({
+        url: '/items',
+        type: 'PUT',
+        data: searchQuery,
+        success: function(response) {
+            console.log('Received items:', response);
+            displayResults(response);
+        }
+    });
+}
+
+function displayResults(items) {
+    var htmlString = '<h3>Search Results</h3>';
+    items.forEach(function(item) {
+        htmlString += '<li>' + item.name + ': ' + item.size + ' and ' + item.color + '</li>';
+    });
+    $('#searchResults').html(htmlString);
 }
 
 function displayItemSelect(items) {
@@ -124,7 +168,7 @@ function getSizes() {
 
 function displayOptions(options, type) {
     // Add all [options] to select with the class .[type]-select
-    var htmlString = '<option disabled default>Choose One</option>';
+    var htmlString = '<option value="none">Choose One</option>';
     options.forEach(function(opt) {
         htmlString += '<option value="' + opt.id + '">' + opt[type] + '</option>';
     });
