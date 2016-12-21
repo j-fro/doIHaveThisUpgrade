@@ -1,12 +1,16 @@
 var express = require('express');
 var path = require('path');
 var colors = require('../routers/colors');
+var sizes = require('../routers/sizes');
+var items = require('../routers/items');
 
 var port = process.env.PORT || 3000;
 
 var app = express();
 
 app.use('/colors', colors);
+app.use('/sizes', sizes);
+app.use('/items', items);
 
 // Base URL
 app.get('/', function(req, res) {
