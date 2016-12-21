@@ -63,4 +63,29 @@ router.post('/', function(req, res) {
     });
 });
 
+router.delete('/', function(req, res) {
+    // Deletes a size from the database
+    console.log('Deleting an item:', req.body);
+    pg.connect(connectionString, function(err, client, done) {
+        if(err) {
+            console.log(err);
+            res.sendStatus(400);
+            done();
+        } else {
+            client.query('DELETE FROM items WHERE id=$1',
+                         [req.body.id], function(err) {
+                if(err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                    done();
+                } else {
+                    console.log('Successfully deleted an item');
+                    res.sendStatus(200);
+                    done();
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

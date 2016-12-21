@@ -14,6 +14,8 @@ function enable() {
     $('#newColorButton').on('click', addColor);
     $('#newSizeButton').on('click', addSize);
     $('#newItemButton').on('click', addItem);
+    $('#removeColorButton').on('click', removeColor);
+    $('#removeSizeButton').on('click', removeSize);
 }
 
 /*
@@ -108,7 +110,7 @@ function addColor() {
 }
 
 function addSize() {
-    // Send a user defined color to the server
+    // Send a user defined size to the server
     var size = $('#newSizeIn').val();
     console.log('Adding a new size:', size);
     $.ajax({
@@ -125,6 +127,46 @@ function addSize() {
         }
     });
 }
+
+/* --- DELETE EXISTING --- */
+
+function removeColor() {
+    // Remove a user defined color from the server
+    var colorId = $('#colorToRemove').val();
+    console.log('Removing a color:', colorId);
+    $.ajax({
+        url: '/colors',
+        type: 'DELETE',
+        data: {
+            id: colorId
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            getColors();
+        }
+    });
+}
+
+function removeSize() {
+    // Remove a user defined size from the server
+    var sizeId = $('#sizeToRemove').val();
+    console.log('Removing a size:', sizeId);
+    $.ajax({
+        url: '/sizes',
+        type: 'DELETE',
+        data: {
+            id: sizeId
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            getSizes();
+        }
+    });
+}
+
+
+
+
 
 function ajaxError(error) {
     console.log('AJAX error:', error);
