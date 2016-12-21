@@ -1,27 +1,16 @@
 var express = require('express');
 var path = require('path');
-var bodyParser = require('body-parser');
-var pg = require('pg');
+var colors = require('../routers/colors');
 
 var port = process.env.PORT || 3000;
-// Local database name
-var DB_NAME = '';
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432' + DB_NAME;
 
 var app = express();
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
+app.use('/colors', colors);
 
 // Base URL
 app.get('/', function(req, res) {
     res.sendFile(path.resolve('views/index.html'));
-});
-
-// Base POST
-app.post('/', function(req, res) {
-    // POST stuff here
-    res.sendStatus(200);
 });
 
 app.listen(port, function() {
