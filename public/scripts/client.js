@@ -7,6 +7,7 @@ $(document).ready(function() {
 function init() {
     getColors();
     getSizes();
+    getItems();
 }
 
 function enable() {
@@ -16,6 +17,7 @@ function enable() {
     $('#newItemButton').on('click', addItem);
     $('#removeColorButton').on('click', removeColor);
     $('#removeSizeButton').on('click', removeSize);
+    $('#removeItemButton').on('click', removeItem);
 }
 
 /*
@@ -23,6 +25,27 @@ function enable() {
  */
 
 /* --- GET & DISPLAY --- */
+
+function getItems() {
+    console.log('Getting items');
+    $.ajax({
+        url: '/items',
+        success: function(response) {
+            console.log('Received items:', response);
+            displayItemSelect(response);
+        },
+        error: ajaxError
+    });
+}
+
+function displayItemSelect(items) {
+    // Adds all items to a select box
+    var htmlString = '';
+    items.forEach(function(item) {
+        htmlString += '<option value="' + item.id + '">' + item.name + '</option>';
+    });
+    $('.item-select').html(htmlString);
+}
 
 /* --- CREATE NEW --- */
 
@@ -45,7 +68,27 @@ function addItem() {
             $('#newItemNameIn').val('');
             $('#newItemColorIn').val('');
             $('#newItemSizeIn').val('');
+            getItems();
         }
+    });
+}
+
+/* --- DELETE EXISTING --- */
+
+function removeItem() {
+    var itemId = $('#itemToRemove').val();
+    console.log('Deleting an item:', itemId);
+    $.ajax({
+        url: '/items',
+        type: 'DELETE',
+        data: {
+            id: itemId
+        },
+        success: function(response) {
+            console.log('Received from server:', response);
+            getItems();
+        },
+        error: ajaxError
     });
 }
 
@@ -163,10 +206,6 @@ function removeSize() {
         }
     });
 }
-
-
-
-
 
 function ajaxError(error) {
     console.log('AJAX error:', error);
