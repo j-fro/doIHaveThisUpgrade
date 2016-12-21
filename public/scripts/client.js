@@ -54,9 +54,9 @@ function searchItems() {
     var searchSize = $('#searchSize').val();
     console.log('Searching for items', searchName, searchColor, searchSize);
     var searchQuery = {};
-    // if (searchName.length > 0) {
-        searchQuery.name = '%' + searchName + '%';
-    // }
+
+    searchQuery.name = '%' + searchName + '%';
+
     if (searchColor !== 'none') {
         searchQuery.colorId = searchColor;
     }
