@@ -38,6 +38,54 @@ router.get('/', function(req, res) {
     });
 });
 
+router.put('/', function(req, res) {
+    // Returns all items from the database
+    console.log('Searching items:', req.body);
+    pg.connect(connectionString, function(err, client, done) {
+        if(err) {
+            console.log(err);
+            res.sendStatus(400);
+        } else {
+            var queryString = 'SELECT items.id, items.name, colors.color, sizes.size ' +
+            'FROM items ' +
+            'JOIN colors ON items.color_id=colors.id ' +
+            'JOIN sizes ON items.size_id=sizes.id ' +
+            'WHERE ';
+            var searchParameters = [];
+            var searchStrings = [];
+            if(req.body.name) {
+                searchParameters.push(req.body.name);
+                searchStrings.push("items.name LIKE $");
+            }
+            if(req.body.colorId) {
+                searchParameters.push(req.body.colorId);
+                searchStrings.push('items.color_id=$');
+            }
+            if(req.body.sizeId) {
+                searchParameters.push(req.body.sizeId);
+                searchStrings.push('items.size_id=$');
+            }
+            for (var i = 0; i < searchStrings.length; i++) {
+                searchStrings[i] = searchStrings[i].replace('$', '$' + (i + 1));
+            }
+            queryString += searchStrings.join(' AND ');
+            console.log(queryString);
+            var query = client.query(queryString, searchParameters, function(err, result) {
+                if(err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                    done();
+                } else {
+                    console.log('Result:', result.rows);
+                    res.send(result.rows);
+                    // Close the connection
+                    done();
+                }
+            });
+        }
+    });
+});
+
 router.post('/', function(req, res) {
     // Adds a new item to the database
     console.log('Adding a new item:', req.body);

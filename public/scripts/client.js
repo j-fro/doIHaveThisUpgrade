@@ -124,7 +124,7 @@ function getSizes() {
 
 function displayOptions(options, type) {
     // Add all [options] to select with the class .[type]-select
-    var htmlString = '';
+    var htmlString = '<option disabled default>Choose One</option>';
     options.forEach(function(opt) {
         htmlString += '<option value="' + opt.id + '">' + opt[type] + '</option>';
     });
