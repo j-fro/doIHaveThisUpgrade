@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans');
+body {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+button {
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+i.fa {
+    font-style: normal;
+}
+
+#switchToSearch:hover, #switchToAdmin:hover, #searchButton:hover {
+    color: blue;
+}
+
+.add-button:hover {
+    color: green;
+    font-weight: bold;
+}
+
+.remove-button:hover {
+    color: red;
+    font-weight: bold;
+}
+
+.admin-group {
+    margin: 10px;
+    padding: 5px;
+    background-color: rgba(130,230,130,.4);
+    border-radius: 10px;
+}
+
+.admin-input {
+    text-align: left;
+    width: 60%;
+    display: inline-block;
+}
+
+input, select {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.admin-label {
+    width: 15%;
+    text-align: left;
+    display: inline-block;
+}
+
+#searchResults {
+    display: inline-block;
+    width: 60%;
+    text-align: left;
+    list-style: none;
+}
+
+#searchResults h3 {
+    text-align: center;
+}

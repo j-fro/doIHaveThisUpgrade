@@ -21,12 +21,15 @@ function enable() {
     $('#removeItemButton').on('click', removeItem);
     $('#searchButton').on('click', searchItems);
     $('#switchToSearch').on('click', function() {
-        $('.admin').slideUp();
-        $('.search').show();
+        $('.admin').fadeOut('fast', function() {
+            $('.search').slideDown();
+        });
+
     });
     $('#switchToAdmin').on('click', function() {
-        $('.admin').slideDown();
-        $('.search').hide();
+        $('.search').fadeOut('fast', function() {
+            $('.admin').slideDown();
+        });
     });
 }
 
@@ -77,7 +80,7 @@ function searchItems() {
 function displayResults(items) {
     var htmlString = '<h3>Search Results</h3>';
     items.forEach(function(item) {
-        htmlString += '<li>' + item.name + ': ' + item.size + ' and ' + item.color + '</li>';
+        htmlString += '<li class="admin-group">' + item.name + ': ' + item.size + ' and ' + item.color + '</li>';
     });
     $('#searchResults').html(htmlString);
 }

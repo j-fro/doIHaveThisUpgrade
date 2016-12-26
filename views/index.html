@@ -12,41 +12,69 @@
 
 <body>
     <section class="admin">
-        <h3>New Color:
-            <input type="text" id="newColorIn">
-            <button type="button" id="newColorButton"><i class="fa fa-plus"></i></button>
-        </h3>
-        <h3>New Size:
-            <input type="text" id="newSizeIn">
-            <button type="button" id="newSizeButton">Create Size</button>
-        </h3>
-        <h3>New Item:
-            <input type="text" id="newItemNameIn">
-            <select id="newItemColorIn" class="color-select"></select>
-            <select id="newItemSizeIn" class="size-select"></select>
-            <button type="button" id="newItemButton">Create Item</button>
-        </h3>
-        <h3>Colors:
-            <select id="colorToRemove" class="color-select"></select>
-            <button type="button" id="removeColorButton">Remove Color</button>
-        </h3>
-        <h3>Sizes:
-            <select id="sizeToRemove" class="size-select"></select>
-            <button type="button" id="removeSizeButton">Remove Size</button>
-        </h3>
-        <h3>Items:
-            <select id="itemToRemove" class="item-select"></select>
-            <button type="button" id="removeItemButton">Remove Item</button>
-        </h3>
+        <h3>Inventory Administration</h3>
+        <div class="admin-group">
+            <span class="admin-label">New Color:</span>
+            <div class="admin-input">
+                <input type="text" id="newColorIn" placeholder="Color">
+            </div>
+            <button type="button" id="newColorButton" class="add-button"><i class="fa fa-plus"></i></button>
+
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">New Size:</span>
+            <div class="admin-input">
+                <input type="text" id="newSizeIn" placeholder="Size">
+            </div>
+            <button type="button" id="newSizeButton" class="add-button"><i class="fa fa-plus"></i></button>
+
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">New Item:</span>
+            <div class="admin-input">
+                <input type="text" id="newItemNameIn" placeholder="Item Name">
+                <select id="newItemColorIn" class="color-select"></select>
+                <select id="newItemSizeIn" class="size-select"></select>
+            </div>
+            <button type="button" id="newItemButton" class="add-button"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">Colors:</span>
+            <div class="admin-input">
+                <select id="colorToRemove" class="color-select"></select>
+            </div>
+            <button type="button" id="removeColorButton" class="remove-button"><i class="fa fa-minus"></i></button>
+
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">Sizes:</span>
+            <div class="admin-input">
+                <select id="sizeToRemove" class="size-select"></select>
+            </div>
+            <button type="button" id="removeSizeButton" class="remove-button"><i class="fa fa-minus"></i></button>
+
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">Items:</span>
+            <div class="admin-input">
+                <select id="itemToRemove" class="item-select"></select>
+            </div>
+            <button type="button" id="removeItemButton" class="remove-button"><i class="fa fa-minus"></i></button>
+
+        </div>
         <button id="switchToSearch">Go to search</button>
     </section>
     <section class="search">
         <h3>Find an item:</h3>
-        <input type="text" id="searchName" placeholder="Item Name">
-        <select id="searchColor" class="color-select"></select>
-        <select id="searchSize" class="size-select"></select>
-        <button type="button" id="searchButton">Search</button>
-        <ul id="searchResults"></ul>
+        <div class="admin-group">
+            <input type="text" id="searchName" placeholder="Item Name">
+            <select id="searchColor" class="color-select"></select>
+            <select id="searchSize" class="size-select"></select>
+            <button type="button" id="searchButton"><i class="fa fa-search fa-lg"></i></button>
+        </div>
+        <div class="search-div">
+            <ul id="searchResults"></ul>
+        </div>
         <button id="switchToAdmin">Go to admin</button>
     </section>
 </body>
