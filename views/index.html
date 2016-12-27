@@ -14,22 +14,6 @@
     <section class="admin">
         <h3>Inventory Administration</h3>
         <div class="admin-group">
-            <span class="admin-label">New Color:</span>
-            <div class="admin-input">
-                <input type="text" id="newColorIn" placeholder="Color">
-            </div>
-            <button type="button" id="newColorButton" class="add-button"><i class="fa fa-plus"></i></button>
-
-        </div>
-        <div class="admin-group">
-            <span class="admin-label">New Size:</span>
-            <div class="admin-input">
-                <input type="text" id="newSizeIn" placeholder="Size">
-            </div>
-            <button type="button" id="newSizeButton" class="add-button"><i class="fa fa-plus"></i></button>
-
-        </div>
-        <div class="admin-group">
             <span class="admin-label">New Item:</span>
             <div class="admin-input">
                 <input type="text" id="newItemNameIn" placeholder="Item Name">
@@ -39,20 +23,18 @@
             <button type="button" id="newItemButton" class="add-button"><i class="fa fa-plus"></i></button>
         </div>
         <div class="admin-group">
-            <span class="admin-label">Colors:</span>
+            <span class="admin-label">New Color:</span>
             <div class="admin-input">
-                <select id="colorToRemove" class="color-select"></select>
+                <input type="text" id="newColorIn" placeholder="Color">
             </div>
-            <button type="button" id="removeColorButton" class="remove-button"><i class="fa fa-minus"></i></button>
-
+            <button type="button" id="newColorButton" class="add-button"><i class="fa fa-plus"></i></button>
         </div>
         <div class="admin-group">
-            <span class="admin-label">Sizes:</span>
+            <span class="admin-label">New Size:</span>
             <div class="admin-input">
-                <select id="sizeToRemove" class="size-select"></select>
+                <input type="text" id="newSizeIn" placeholder="Size">
             </div>
-            <button type="button" id="removeSizeButton" class="remove-button"><i class="fa fa-minus"></i></button>
-
+            <button type="button" id="newSizeButton" class="add-button"><i class="fa fa-plus"></i></button>
         </div>
         <div class="admin-group">
             <span class="admin-label">Items:</span>
@@ -60,7 +42,20 @@
                 <select id="itemToRemove" class="item-select"></select>
             </div>
             <button type="button" id="removeItemButton" class="remove-button"><i class="fa fa-minus"></i></button>
-
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">Colors:</span>
+            <div class="admin-input">
+                <select id="colorToRemove" class="color-select"></select>
+            </div>
+            <button type="button" id="removeColorButton" class="remove-button"><i class="fa fa-minus"></i></button>
+        </div>
+        <div class="admin-group">
+            <span class="admin-label">Sizes:</span>
+            <div class="admin-input">
+                <select id="sizeToRemove" class="size-select"></select>
+            </div>
+            <button type="button" id="removeSizeButton" class="remove-button"><i class="fa fa-minus"></i></button>
         </div>
         <button id="switchToSearch">Go to search</button>
     </section>
